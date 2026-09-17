@@ -1,0 +1,1160 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>(function(){try{
+var W=window;if(W.__TOY_PERF__){return;}
+var P=W.performance;if(!P||!P.getEntriesByType){return;}
+var M={fw:[],sent:false};W.__TOY_PERF__=M;
+M.t0=Math.round((P.timeOrigin!==undefined&&P.timeOrigin!==null)?P.timeOrigin:
+ ((P.timing&&P.timing.navigationStart)||Date.now()));
+M.sid=(W.crypto&&W.crypto.randomUUID)?W.crypto.randomUUID():
+ (Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10));
+M.fcp=undefined;
+M.readFCP=function(){try{
+ if(M.fcp!==undefined){return M.fcp;}
+ var es=P.getEntriesByType("paint")||[];
+ for(var i=0;i<es.length;i++){
+  if(es[i].name==="first-contentful-paint"){M.fcp=Math.round(es[i].startTime);return M.fcp;}}
+}catch(e){}
+return M.fcp;};
+try{var po=new W.PerformanceObserver(function(l){try{
+ var es=l.getEntries();for(var i=0;i<es.length;i++){
+  if(es[i].name==="first-contentful-paint"&&M.fcp===undefined){M.fcp=Math.round(es[i].startTime);}}
+}catch(e){}});
+try{po.observe({type:"paint",buffered:true});}catch(e){po.observe({entryTypes:["paint"]});}
+}catch(e){}
+M.probe=function(){try{
+ var hit=[];var d=document;
+ var add=function(k){if(hit.indexOf(k)<0){hit.push(k);}};
+ if(W.unityInstance||W.UnityLoader||W.createUnityInstance){add("unity");}
+ if(W.vm||W.Scratch||W.ScratchVM){add("scratch");}
+ if(W.cc||W.cocos){add("cocos");}
+ if(W.Godot){add("godot");}
+ if(W.PIXI){add("pixi");}
+ if(W.Phaser){add("phaser");}
+ if(W.THREE){add("three");}
+ if(W.BABYLON){add("babylon");}
+ if(W.WebAssembly&&W.Module&&(W.Module.asm||W.Module.wasmBinary||W._malloc)){add("wasm");}
+ if(W.Vue||d.querySelector&&d.querySelector("[data-v-app]")){add("vue");}
+ if(W.React||W.ReactDOM){add("react");}
+ for(var i=0;i<hit.length;i++){if(M.fw.indexOf(hit[i])<0){M.fw.push(hit[i]);}}
+}catch(e){}};
+M.kind=function(){try{
+ var cv=document.getElementsByTagName?document.getElementsByTagName("canvas"):[];
+ var engine=["unity","scratch","cocos","godot","pixi","phaser","three","babylon"];
+ var hasEngine=false;
+ for(var i=0;i<engine.length;i++){if(M.fw.indexOf(engine[i])>=0){hasEngine=true;break;}}
+ if(cv&&cv.length>0){return hasEngine?"canvas-engine":"canvas";}
+ return hasEngine?"dom-engine":"dom";
+}catch(e){return "unknown";}};
+M.collect=function(withKind){try{
+ var nav=(P.getEntriesByType("navigation")||[])[0]||{};
+ var o={toy_id:M.toyID,render_mode:M.renderMode,layer:M.layer,
+  session_id:M.sid,time_origin:M.t0};
+ var put=function(k,v){try{var x=Math.round(v||0);if(x>0){o[k]=x;}}catch(e){}};
+ put("ttfb",nav.responseStart);put("dcl",nav.domContentLoadedEventEnd);
+ put("load",nav.loadEventEnd);put("doc_bytes",nav.decodedBodySize);
+ if(withKind){M.probe();o.kind=M.kind();o.fw=M.fw.join(",");}
+ var fcp=M.readFCP();
+ if(fcp!==undefined){o.fcp=fcp;}
+ if(M.fcpEst!==undefined){o.fcp_est=M.fcpEst;}
+ return o;
+}catch(e){return null;}};
+}catch(e){}})();(function(){try{
+var W=window;var M=W.__TOY_PERF__;if(!M){return;}
+var P=W.performance;if(!P){return;}
+M.fcpEst=undefined;
+M.armEst=function(){try{
+ if(M.estArmed){return;}M.estArmed=true;
+ if(!W.MutationObserver){return;}
+ var D=document;
+ var SKIP={SCRIPT:1,STYLE:1,LINK:1,META:1,HEAD:1,TITLE:1,NOSCRIPT:1,TEMPLATE:1};
+ var INK={IMG:1,SVG:1,VIDEO:1,INPUT:1,BUTTON:1,TEXTAREA:1,SELECT:1};
+ var vis=function(n){try{var s=W.getComputedStyle(n);
+  return !s||(s.display!=="none"&&s.visibility!=="hidden"&&s.opacity!=="0");
+ }catch(e){return true;}};
+ var scan=function(n,dep){try{
+  if(dep>14){return false;}
+  if(n.nodeType===3){return /\S/.test(n.nodeValue||"");}
+  if(n.nodeType!==1){return false;}
+  if(SKIP[n.tagName]){return false;}
+  if(!vis(n)){return false;}
+  if(INK[n.tagName]){return true;}
+  try{var s=W.getComputedStyle(n);
+   if(s&&s.backgroundImage&&s.backgroundImage!=="none"){return true;}}catch(e){}
+  var c=n.childNodes||[];
+  for(var i=0;i<c.length;i++){if(scan(c[i],dep+1)){return true;}}
+  return false;
+ }catch(e){return false;}};
+ var anc=function(n){try{var p=n.parentNode;
+  while(p&&p.nodeType===1){if(SKIP[p.tagName]||!vis(p)){return false;}p=p.parentNode;}
+  return true;
+ }catch(e){return true;}};
+ var ink=function(n){try{
+  if(!n||!D.body){return false;}
+  if(n!==D.body&&(!D.body.contains||!D.body.contains(n))){return false;}
+  if(!anc(n)){return false;}
+  return scan(n,0);
+ }catch(e){return false;}};
+ var now=function(){try{return Math.round(P.now?P.now():(Date.now()-M.t0));}catch(e){return 0;}};
+ var mark=function(){try{
+  if(M.fcpEst!==undefined){return;}
+  var set=function(){try{if(M.fcpEst===undefined){M.fcpEst=now();}}catch(e){}};
+  if(W.requestAnimationFrame){W.requestAnimationFrame(function(){try{setTimeout(set,0);}catch(e){set();}});}
+  else{setTimeout(set,16);}
+ }catch(e){}};
+ var mo=new W.MutationObserver(function(rs){try{
+  for(var i=0;i<rs.length;i++){
+   var a=rs[i].addedNodes||[];
+   for(var j=0;j<a.length;j++){if(ink(a[j])){mark();mo.disconnect();return;}}
+   if(rs[i].type==="characterData"&&ink(rs[i].target)){mark();mo.disconnect();return;}}
+ }catch(e){}});
+ mo.observe(D,{childList:true,subtree:true,characterData:true});
+}catch(e){}};
+}catch(e){}})();(function(){try{
+var W=window;var M=W.__TOY_PERF__;if(!M){return;}
+var NS="toy-shell-ability";
+M.toyID=34190288731136;M.renderMode=2;
+M.layer="content";
+M.armEst();
+var flush=function(rs,up){try{
+ if(up){if(M.sent2){return;}M.sent2=true;}else{if(M.sent){return;}M.sent=true;}
+ var o=M.collect(true);if(!o){return;}
+ o.flush_reason=up?"up":rs;o.ns=NS;o.type="perf";
+ if(W.parent&&W.parent!==W){W.parent.postMessage(o,"*");}
+}catch(e){}};
+try{var n=0;var tk=setInterval(function(){try{M.probe();if(++n>8||M.done){clearInterval(tk);}}catch(e){}},400);}catch(e){}
+var arm=function(){try{
+ var waited=0;
+ var stop=function(t){try{M.done=true;clearInterval(t);}catch(e){}};
+ var tick=setInterval(function(){try{
+  waited+=300;
+  if(M.readFCP()!==undefined){stop(tick);flush("fcp",M.sent);return;}
+  if(M.fcpEst!==undefined){flush("est",false);}
+  if(waited>=5000){stop(tick);flush("bound",false);}
+ }catch(e){stop(tick);flush("err",false);}},300);
+}catch(e){flush("err",false);}};
+if(document.readyState==="complete"){arm();}
+else{W.addEventListener("load",arm,false);}
+}catch(e){}})();</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>掰手机</title>
+<style>
+  /* 总分等级字体 */
+  @font-face {
+    font-family: 'ZQK';
+    src: url('assets/ZQKfreefont-2.ttf') format('truetype');
+  }
+  /* 总分条：文档流内居中，自然排在 topbar 下方 */
+  #scoreBarWrap {
+    position: relative;
+    width: 46%; max-width: 520px; pointer-events: none;
+    margin-top: 20px;
+    padding-top: 24px; /* 预留刻度文字行高，文字占位不再悬空侵入上方 */
+    text-align: center;
+  }
+  #scoreBarOuter {
+    position: relative;
+    height: 14px; border-radius: 7px; overflow: visible;
+    background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.22);
+  }
+  /* 5 个等级分界竖线（B/A/S/SS/SSS），位置与 updateGrade 的阈值一致 */
+  #scoreBarOuter .tick {
+    position: absolute; top: -4px; bottom: -4px; width: 2px;
+    background: rgba(255,255,255,0.65); transform: translateX(-1px);
+    pointer-events: none;
+  }
+  /* 等级字母行：正常占位（不再负偏移悬出条外），物理上不会遮挡上方元素 */
+  #scoreBarWrap .tickLbl {
+    position: absolute; top: 0; transform: translateX(-50%);
+    font-size: 1em; color: rgba(255,255,255,0.85);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  }
+  /* 红 -> 绿渐变轨道，填充宽度按理论总分百分比 */
+  #scoreBarFill {
+    height: 100%; width: 0%;
+    background: linear-gradient(to right, #ff4d4f, #ffd24d 50%, #39d353);
+    background-size: 100vw 100%; background-attachment: fixed;
+    transition: width 0.35s ease;
+    border-radius: 7px;
+  }
+  #scoreGrade {
+    margin-top: 4px;
+    font-family: 'ZQK', sans-serif;
+    font-size: 5em; font-weight: 900; letter-spacing: 2px;
+    text-shadow: 0 0 14px currentColor, 0 2px 8px rgba(0,0,0,0.6);
+  }
+  /* 每个等级不同颜色，SSS 为金色 */
+  .grade-B   { color: #b8c2d0; }
+  .grade-A   { color: #4db8ff; }
+  .grade-S   { color: #9b6bff; }
+  .grade-SS  { color: #ff4d9e; }
+  .grade-SSS { color: #ffd24d; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 28%, #2c3e63 0%, #141a30 55%, #090c18 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: none;
+    color: #fff;
+  }
+  /* 连击背景图：连击达 50 的倍数后显示 assets/1.png~8.png */
+  #comboBg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0; transition: opacity 0.5s ease;
+  }
+  #comboBg.show { opacity: 1; }
+  #comboBg img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* 全局粒子特效画布：位于背景图之上、3D 画布之下 */
+  #particleCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  #canvas-container { position: fixed; inset: 0; z-index: 1; }
+  #ui { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+
+  /* 顶部 HUD：位于#musicBar下方，文档流布局，topbar 与总分条同列，杜绝文字重叠 */
+  #hud {
+    position: absolute; top: 60px; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 16px 20px 0; pointer-events: none; z-index: 5;
+  }
+  /* 相对布局包裹层：静音+统计条与总分条同处一个文档流，互不遮挡 */
+  #topArea {
+    position: relative;
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  #topbar {
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  /* 静音按钮 + 统计条包成一组：移动端纵向堆叠，窄屏不再互相挤压 */
+  .topLeft {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  }
+  #muteBtn {
+    pointer-events: auto;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 15px;
+    padding: 8px 14px; border-radius: 999px; cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+  #muteBtn:active { transform: scale(0.96); }
+  #muteBtn .ico { margin-right: 6px; }
+  #status {
+    font-size: 17px; font-weight: 600; letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.28); padding: 8px 16px; border-radius: 999px;
+  }
+  #status .num { color: #6fe3a0; }
+
+  #indicator {
+    position: absolute; bottom: 16%; left: 50%;
+    transform: translateX(-50%);
+    font-size: 5em; font-weight: 900; line-height: 1;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    animation: pop 0.25s ease-out;
+  }
+  #indicator.check { color: #39d353; }
+  #indicator.cross { color: #ff4d4f; }
+  #indicator.perfect { color: #39d353; }
+  #indicator.great { color: #4db8ff; }
+  #indicator.fail { color: #ff4d4f; }
+  @keyframes pop { from { transform: translateX(-50%) scale(0.4); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+  /* 连击数显示 */
+  #combo {
+    position: absolute; top: calc(26% + 60px); left: 50%; transform: translateX(-50%);
+    font-size: 30px; font-weight: 800; color: #ffd24d; letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.55); z-index: 4; pointer-events: none;
+    animation: popCombo 0.18s ease-out;
+    background: rgba(128,128,128,0.5); border-radius: 8px; padding: 4px 16px;
+  }
+  @keyframes popCombo { from { transform: translateX(-50%) scale(0.6); opacity: 0.4; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+  /* 整十连击全屏播报：1 秒内缩小并消失 */
+  #comboMilestone {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 16vh; font-weight: 900; color: #ffd24d; letter-spacing: 2px;
+    text-shadow: 0 0 32px rgba(255,160,40,0.85); pointer-events: none; z-index: 7;
+    animation: milestonePop 1s ease-out forwards;
+  }
+  @keyframes milestonePop {
+    0%   { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.15); opacity: 0; }
+  }
+
+  /* 滑动手势提示：红色下箭头 */
+  #swipeHint { position: absolute; pointer-events: none; color: #ff3b30; z-index: 3; }
+  #swipeHint.desktop { top: 50%; left: calc(50% - 240px); transform: translateY(-50%); }
+  #swipeHint.mobile  { bottom: 36%; left: 50%; transform: translateX(-50%); }
+  #swipeHint .bob {
+    display: flex; flex-direction: column; align-items: center;
+    animation: bob 1s ease-in-out infinite;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+  }
+  #swipeHint .arrow {
+    width: 0; height: 0;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-top: 28px solid #ff3b30;
+    filter: drop-shadow(0 0 6px rgba(255,59,48,0.6));
+  }
+  #swipeHint .cap { font-size: 13px; font-weight: 700; margin-top: 6px; letter-spacing: 1px; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(14px); } }
+
+  /* 音游提示条：顶部音符轨道(左移) + 右侧实时电平表 */
+  #musicBar {
+    position: absolute; top: 0; left: 0; right: 0; height: 60px;
+    display: flex; align-items: stretch; pointer-events: none; z-index: 6;
+    background: rgba(0,0,0,0.38); backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  #noteTrack { position: relative; flex: 1; overflow: hidden; }
+  #playhead { position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+    background: rgba(255,255,255,0.55); box-shadow: 0 0 8px rgba(255,255,255,0.6); }
+  /* 音符整体左移用 Web Animations API 驱动（JS 控制播放/暂停），不写死在 CSS 关键帧里 */
+  #noteScroll { position: absolute; top: 0; left: 0; height: 100%; will-change: transform; }
+  .note {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 36px; border-radius: 4px; text-align: center; line-height: 36px;
+    font-size: 16px; color: #3a2400;
+    background: linear-gradient(#ffe27a, #ff8a1e);
+    box-shadow: 0 0 8px rgba(255,150,40,0.75);
+  }
+  #levelMeter {
+    width: 132px; height: 100%; display: flex; align-items: center; gap: 8px;
+    padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.18);
+  }
+  #levelMeter .lbl { font-size: 12px; opacity: 0.7; }
+  #levelBarOuter { width: 20px; height: 72%; background: rgba(255,255,255,0.1);
+    border-radius: 5px; position: relative; overflow: hidden; }
+  #levelBarFill { position: absolute; bottom: 0; left: 0; right: 0; height: 0%;
+    background: linear-gradient(to top, #39d353, #ffd24d 60%, #ff4d4f); transition: height 0.05s linear; }
+
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(6,9,18,0.6); pointer-events: auto; text-align: center;
+    padding: 24px;
+  }
+  .overlay h1 { font-size: 44px; margin-bottom: 14px; letter-spacing: 2px; }
+  .overlay p { font-size: 17px; opacity: 0.85; margin-bottom: 28px; line-height: 1.7; max-width: 320px; }
+  .bigbtn {
+    pointer-events: auto;
+    background: linear-gradient(135deg, #ff7a45, #ff3d6e);
+    color: #fff; font-size: 20px; font-weight: 700;
+    padding: 14px 44px; border: none; border-radius: 999px; cursor: pointer;
+    box-shadow: 0 8px 30px rgba(255,61,110,0.45);
+  }
+  .bigbtn:active { transform: scale(0.96); }
+  .hint { margin-top: 18px; font-size: 13px; opacity: 0.6; }
+  /* 结算页：排行榜 + 关注/充电 */
+  #rankBoard {
+    width: 78%; max-width: 380px; max-height: 30vh; overflow-y: auto;
+    background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; pointer-events: auto;
+  }
+  #rankBoard .rankTitle {
+    font-size: 16px; font-weight: 800; letter-spacing: 2px; color: #ffd24d;
+    text-align: center; margin-bottom: 6px;
+  }
+  #rankBoard .rankRow {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; padding: 3px 0; text-align: left;
+  }
+  #rankBoard .rk { width: 22px; font-weight: 800; color: #ffd24d; text-align: center; }
+  #rankBoard .rk1 { color: #ff4d4f; }
+  #rankBoard .rk2 { color: #c0c8ff; }
+  #rankBoard .rk3 { color: #ffa45e; }
+  #rankBoard .ravatar { width: 20px; height: 20px; border-radius: 50%; }
+  #rankBoard .rname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.9; }
+  #rankBoard .rscore { font-weight: 700; color: #6fe3a0; }
+  .likeAsk { font-size: 16px; margin-bottom: 10px !important; }
+  .followBtn { margin-bottom: 12px; background: linear-gradient(135deg, #fb7299, #ff5c7a); box-shadow: 0 8px 30px rgba(251,114,153,0.45); }
+
+  /* 移动端：缩小刻度文字与等级字 */
+  @media (max-width: 767px) {
+    #scoreBarWrap { width: 62%; }
+    #scoreBarWrap .tickLbl { font-size: 12px; }
+    #scoreGrade { font-size: 1.6em; }
+  }
+</style>
+</head>
+<body>
+  <div id="comboBg"><img id="comboBgImg" src="" alt="" /></div>
+  <canvas id="particleCanvas"></canvas>
+  <div id="canvas-container"></div>
+
+  <div id="ui">
+    <div id="hud">
+      <div id="topArea">
+        <div id="topbar">
+          <div class="topLeft">
+            <button id="muteBtn" @click="toggleMute"><span class="ico">{{ state.muted ? '🔇' : '🔊' }}</span>{{ state.muted ? '静音' : '音乐' }}</button>
+            <div id="status">掰直 <span class="num">{{ state.score }}</span> &nbsp;·&nbsp; 时间 <span class="num">{{ state.timeLeft }}</span>s &nbsp;·&nbsp; 总分 <span class="num">{{ state.musicScore }}</span></div>
+          </div>
+        </div>
+
+        <div id="scoreBarWrap" v-if="state.playing">
+          <span class="tickLbl" style="left:0%">B</span>
+          <span class="tickLbl" style="left:30%">A</span>
+          <span class="tickLbl" style="left:55%">S</span>
+          <span class="tickLbl" style="left:75%">SS</span>
+          <span class="tickLbl" style="left:90%">SSS</span>
+          <div id="scoreBarOuter">
+            <div id="scoreBarFill" :style="{ width: state.scorePct + '%' }"></div>
+            <span class="tick" style="left:0%"></span>
+            <span class="tick" style="left:30%"></span>
+            <span class="tick" style="left:55%"></span>
+            <span class="tick" style="left:75%"></span>
+            <span class="tick" style="left:90%"></span>
+          </div>
+          <div id="scoreGrade" :class="'grade-' + state.grade">{{ state.grade }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="musicBar">
+      <div id="levelMeter">
+        <span class="lbl">电平</span>
+        <div id="levelBarOuter"><div id="levelBarFill"></div></div>
+      </div>
+      <div id="noteTrack">
+        <div id="noteScroll"></div>
+        <div id="playhead"></div>
+      </div>
+    </div>
+
+    <div id="combo" v-if="state.playing && state.combo > 0" :key="state.combo">连击 {{ state.combo }}</div>
+
+    <div id="indicator" v-if="state.showIndicator" :class="state.indicatorType">
+      {{ state.indicatorText }}
+    </div>
+
+    <div id="comboMilestone" v-if="state.milestone.show" :key="state.milestoneKey">
+      {{ state.milestone.text }}
+    </div>
+
+    <div id="swipeHint" v-if="state.started && !state.gameOver" :class="isMobile ? 'mobile' : 'desktop'">
+      <div class="bob">
+        <div class="arrow"></div>
+        <div class="cap">向下滑动</div>
+      </div>
+    </div>
+
+    <div class="overlay" v-if="!state.started">
+      <h1>掰 手 机</h1>
+      <p>折叠屏质量很差，<br/>向下滑动把它<b>掰直</b>就会损坏。<br/>每次掰直都会生成新手机！</p>
+      <button class="bigbtn" @click="start">开始游戏</button>
+      <div class="hint">向下滑动 = 掰手机 · 倒计时 10 秒</div>
+    </div>
+
+    <div class="overlay" v-if="state.gameOver">
+      <h1>时间到！</h1>
+      <p>你成功掰直了<br/><b style="font-size:34px;color:#6fe3a0">{{ state.score }}</b> 台手机<br/>
+        音游总分<br/><b style="font-size:40px;color:#ffd24d">{{ state.musicScore }}</b></p>
+
+      <div id="rankBoard" v-if="state.rankList.length">
+        <div class="rankTitle">排行榜</div>
+        <div class="rankRow" v-for="item in state.rankList" :key="item.rank">
+          <span class="rk" :class="'rk' + item.rank">{{ item.rank }}</span>
+          <img class="ravatar" :src="item.avatar" />
+          <span class="rname">{{ item.nickname }}</span>
+          <span class="rscore">{{ item.score }}</span>
+        </div>
+        <div class="rankRow" v-if="state.myRank.ranked">
+          <span class="rk">{{ state.myRank.rank }}</span>
+          <span class="rname">我的排名</span>
+          <span class="rscore">{{ state.myRank.score }}</span>
+        </div>
+      </div>
+      <div class="hint" v-else>排行榜加载中…</div>
+
+      <p class="likeAsk">喜欢玩掰手机游戏吗？</p>
+      <button class="bigbtn followBtn" @click="followAuthor">点击关注或充电</button>
+      <button class="bigbtn" @click="restart">再来一局</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+  (function () {
+    const { createApp, reactive } = Vue;
+
+    // 设备类型：无悬停且为粗指针（触屏）或窄屏视为移动端
+    const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth < 768;
+
+    /* ---------- 共享游戏状态（Vue 响应式） ---------- */
+    const state = reactive({
+      started: false,
+      playing: false,
+      gameOver: false,
+      timeLeft: 146,
+      score: 0,
+      muted: false,
+      musicScore: 0,              // 音游总分
+      scorePct: 0,                // 总分占理论总分的百分比
+      grade: '',                  // 总分等级 B/A/S/SS/SSS
+      rankList: [],               // 排行榜前几名
+      myRank: { ranked: false, rank: 0, score: 0 }, // 我的排名
+      showIndicator: false,
+      indicatorType: 'check',   // check / cross / perfect / great / fail
+      indicatorText: '',        // 屏幕上显示的判定文字
+      combo: 0,                 // 连击数
+      milestone: { show: false, text: '' }, // 整十连击全屏播报
+      milestoneKey: 0           // 用于重播播报动画
+    });
+
+    /* ---------- three.js 场景 ---------- */
+    const container = document.getElementById('canvas-container');
+    let W = window.innerWidth, H = window.innerHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+    camera.position.set(4.5, 2, 11.5); // 3/4 视角：既看清 90° 书本折叠，也看清绕 Z 轴旋转
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.85);
+    dir.position.set(4, 6, 8);
+    scene.add(dir);
+    const dir2 = new THREE.DirectionalLight(0x88aaff, 0.35);
+    dir2.position.set(-5, -3, 4);
+    scene.add(dir2);
+
+    /* ---------- 折叠屏手机建模 ---------- */
+    const HALF_W = 2.4;    // 每半屏宽（X，沿长边展开方向）
+    const PHONE_H = 4.0;   // 屏高（Y，即相连的长边 / 铰链长度）
+    const PANEL_T = 0.18;  // 厚度（Z）
+
+    const bezelMat = new THREE.MeshStandardMaterial({ color: 0x202028, roughness: 0.6, metalness: 0.3 });
+    const backMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.5 }); // 背面黑色
+
+    function makeScreenTexture(damaged) {
+      const c = document.createElement('canvas');
+      c.width = 256; c.height = 512;
+      const ctx = c.getContext('2d');
+      if (damaged) {
+        // 花屏彩条
+        const cols = ['#ff2d2d', '#ff8c1a', '#ffe11a', '#2dff5a', '#1ad6ff', '#2d5bff', '#a01aff', '#ff2db5'];
+        const bw = c.width / cols.length;
+        for (let i = 0; i < cols.length; i++) {
+          ctx.fillStyle = cols[i];
+          ctx.fillRect(i * bw, 0, bw + 1, c.height);
+        }
+        // 叠加噪点横纹，增强“花屏”感
+        ctx.globalAlpha = 0.35;
+        for (let y = 0; y < c.height; y += 6) {
+          ctx.fillStyle = (y % 12 === 0) ? '#ffffff' : '#000000';
+          ctx.fillRect(0, y, c.width, 3);
+        }
+        ctx.globalAlpha = 1;
+      } else {
+        const g = ctx.createLinearGradient(0, 0, 0, c.height);
+        g.addColorStop(0, '#16335c');
+        g.addColorStop(1, '#0a1430');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.font = 'bold 34px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('BEND', c.width / 2, c.height / 2 - 10);
+        ctx.font = '18px sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+        ctx.fillText('折叠屏', c.width / 2, c.height / 2 + 24);
+      }
+      return new THREE.CanvasTexture(c);
+    }
+
+    // 折叠屏：两半沿“长边”(竖直方向)相连，像书本在长边处铰接。
+    // 右半固定向 +X 展开、屏幕朝 +Z；左半绕竖直铰链(Y轴)旋转。
+    // damaged=true 时正面显示花屏彩条。
+    function createPhone(damaged) {
+      const group = new THREE.Group();
+      const screenTex = makeScreenTexture(damaged);
+      const frontMat = new THREE.MeshStandardMaterial({ map: screenTex, roughness: 0.35, metalness: 0.1, emissive: 0x000000 });
+      // Box 面序: +X,-X,+Y,-Y,+Z(正面/屏),-Z(背面/黑)
+      const mats = [bezelMat, bezelMat, bezelMat, bezelMat, frontMat, backMat];
+
+      const rightMesh = new THREE.Mesh(new THREE.BoxGeometry(HALF_W, PHONE_H, PANEL_T), mats);
+      rightMesh.position.set(HALF_W / 2, 0, 0); // 固定：向 +X 展开
+
+      const leftGroup = new THREE.Group();      // 绕竖直铰链(Y轴)旋转
+      const leftMesh = new THREE.Mesh(new THREE.BoxGeometry(HALF_W, PHONE_H, PANEL_T), mats);
+      leftMesh.position.set(-HALF_W / 2, 0, 0);  // 局部：向 -X 展开（镜像半屏）
+      leftGroup.add(leftMesh);
+
+      group.add(rightMesh);
+      group.add(leftGroup);
+      group.userData = { leftGroup: leftGroup, frontMat: frontMat, damaged: damaged };
+      return group;
+    }
+
+    // fp: 0 = 折叠 90°(书本打开成直角) -> 1 = 掰直 180°(摊平成一整块)
+    // 左半绕 Y 轴从 90° 转到 0°
+    function setFold(group, fp) {
+      const beta = (1 - fp) * 90;
+      group.userData.leftGroup.rotation.y = THREE.MathUtils.degToRad(beta);
+    }
+
+    const mainPhone = createPhone(false);
+    setFold(mainPhone, 0);
+    scene.add(mainPhone);
+
+    const falling = []; // 损坏下落的手机
+
+    /* ---------- 连击背景图 + 全局粒子特效 ---------- */
+    const comboBgEl = document.getElementById('comboBg');
+    const comboBgImg = document.getElementById('comboBgImg');
+    const BG_MAX = 8; // assets/1.png ~ assets/8.png
+
+    // 每 50 连击对应一张背景图：50->1.png, 100->2.png ... 400->8.png
+    function bgIndexForCombo(c) { return Math.min(BG_MAX, Math.floor(c / 50)); }
+
+    // 更新背景图：低于 50 连击时无背景，清零时去除
+    function updateComboBg(combo) {
+      if (combo >= 50) {
+        const idx = bgIndexForCombo(combo);
+        const src = 'assets/' + idx + '.png';
+        if (comboBgImg.getAttribute('src') !== src) comboBgImg.setAttribute('src', src);
+        comboBgEl.classList.add('show');
+      } else {
+        comboBgEl.classList.remove('show');
+      }
+    }
+
+    // 全局粒子特效：连击每达 50 的倍数换一种颜色/形态，清零时消失
+    const pCanvas = document.getElementById('particleCanvas');
+    const pCtx = pCanvas.getContext('2d');
+    let particles = [];
+    let particleHue = 0;         // 每 50 连击换一种色相 -> "换一种特效"
+    let particleActive = false;  // 连击达 50 倍数后为 true，清零时 false
+
+    const PARTICLE_THEMES = [ // 每档特效的外观参数
+      { hue: 45,  shape: 'star',   speed: 1.6, size: 5 },  // 50: 金色星形
+      { hue: 20,  shape: 'circle', speed: 2.0, size: 4 },  // 100: 橙色圆点
+      { hue: 330, shape: 'circle', speed: 2.4, size: 6 },  // 150: 品红大点
+      { hue: 270, shape: 'star',   speed: 2.2, size: 5 },  // 200: 紫色星形
+      { hue: 200, shape: 'circle', speed: 2.6, size: 4 },  // 250: 蓝色圆点
+      { hue: 150, shape: 'star',   speed: 2.8, size: 6 },  // 300: 绿色星形
+      { hue: 90,  shape: 'circle', speed: 3.0, size: 5 },  // 350: 黄绿圆点
+      { hue: 0,   shape: 'star',   speed: 3.2, size: 7 }   // 400: 红色大星
+    ];
+
+    function spawnParticles(n) {
+      const theme = PARTICLE_THEMES[particleHue];
+      for (let i = 0; i < n; i++) {
+        particles.push({
+          x: Math.random() * pCanvas.width,
+          y: pCanvas.height + Math.random() * 60,
+          vx: (Math.random() - 0.5) * theme.speed,
+          vy: -(0.6 + Math.random() * theme.speed),
+          size: theme.size * (0.6 + Math.random() * 0.8),
+          rot: Math.random() * Math.PI * 2,
+          vr: (Math.random() - 0.5) * 0.15,
+          hue: theme.hue + (Math.random() * 20 - 10),
+          shape: theme.shape,
+          alpha: 0.7 + Math.random() * 0.3
+        });
+      }
+      if (particles.length > 400) particles.splice(0, particles.length - 400);
+    }
+
+    function drawParticle(p) {
+      pCtx.save();
+      pCtx.translate(p.x, p.y);
+      pCtx.rotate(p.rot);
+      pCtx.globalAlpha = p.alpha;
+      pCtx.fillStyle = 'hsl(' + p.hue + ',90%,60%)';
+      pCtx.shadowColor = 'hsl(' + p.hue + ',90%,65%)';
+      pCtx.shadowBlur = 10;
+      if (p.shape === 'star') {
+        pCtx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          const a = (i * 4 * Math.PI) / 5 - Math.PI / 2;
+          const px = Math.cos(a) * p.size, py = Math.sin(a) * p.size;
+          i === 0 ? pCtx.moveTo(px, py) : pCtx.lineTo(px, py);
+        }
+        pCtx.closePath();
+        pCtx.fill();
+      } else {
+        pCtx.beginPath();
+        pCtx.arc(0, 0, p.size, 0, Math.PI * 2);
+        pCtx.fill();
+      }
+      pCtx.restore();
+    }
+
+    function updateParticles(dt) {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      if (!particleActive) { particles = []; return; }
+      if (Math.random() < 0.5) spawnParticles(3);
+      for (const p of particles) {
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        if (p.y < -20) { p.y = pCanvas.height + 20; p.x = Math.random() * pCanvas.width; }
+        drawParticle(p);
+      }
+    }
+
+    function resizeParticleCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    resizeParticleCanvas();
+    window.addEventListener('resize', resizeParticleCanvas);
+
+    // 连击变化入口：更新背景图 + 粒子档位
+    function onComboChanged(combo) {
+      updateComboBg(combo);
+      if (combo >= 50 && combo % 50 === 0) {
+        particleHue = Math.min(PARTICLE_THEMES.length - 1, Math.floor(combo / 50) - 1); // 换一种特效
+        particleActive = true;
+      } else if (combo === 0) {
+        particleActive = false; // 清零时特效消失
+      }
+    }
+
+    /* ---------- 游戏逻辑 ---------- */
+    const START_DIST = 320;  // 初始需要的滑动距离(px)
+    const MIN_DIST = 90;     // 最小滑动距离
+    const STEP = 60;         // 每次失败减少的距离
+
+    let requiredDistance = START_DIST;
+    let foldProgress = 0;                 // 手机当前已掰开的角度(0=折叠90°,1=掰直)
+    let dragging = false, startY = 0, dragDist = 0, startFold = 0;
+    let timerId = null, indicatorTimer = null, milestoneTimer = null;
+    let frenzy = false; // 连击达 50 倍数时进入：旋转加速 + 抖动；清零时复原
+
+    // 在屏幕中央闪现一段判定文字
+    function flashIndicator(text, type) {
+      state.indicatorText = text;
+      state.indicatorType = type;
+      state.showIndicator = true;
+      clearTimeout(indicatorTimer);
+      indicatorTimer = setTimeout(() => { state.showIndicator = false; }, 700);
+    }
+
+    // 整十连击全屏播报：1 秒内缩小并消失
+    function triggerMilestone(n) {
+      state.milestone.text = n + '连击';
+      state.milestone.show = true;
+      state.milestoneKey++;
+      clearTimeout(milestoneTimer);
+      milestoneTimer = setTimeout(() => { state.milestone.show = false; }, 1000);
+    }
+
+    // 理论总分：所有音符全“完美”（300 分 + 连击奖励）时的得分上限
+    // 按理论总分百分比划分 5 个等级：B/A/S/SS/SSS
+    function updateGrade() {
+      const n = NOTES.length;
+      const MAX_SCORE = n * 300 + 20 * (n - 1) * n / 2;
+      const pct = Math.max(0, Math.min(100, state.musicScore / MAX_SCORE * 100));
+      state.scorePct = pct;
+      state.grade = pct >= 90 ? 'SSS' : pct >= 75 ? 'SS' : pct >= 55 ? 'S' : pct >= 30 ? 'A' : 'B';
+    }
+
+    // 音游判定：掰直成功时，比较当前歌曲相位与最近音符的时刻差
+    function rhythmJudge() {
+      if (!noteAnim || !NOTES.length) return;
+      // 当前歌曲相位(秒)：动画 currentTime 处于 0~songDuration 的循环内
+      const phase = (noteAnim.currentTime % (songDuration * 1000)) / 1000;
+      let best = Infinity;
+      for (const t of NOTES) {
+        let d = phase - t;
+        // 环形距离：音符每 songDuration 循环一次
+        d = ((d + songDuration / 2) % songDuration + songDuration) % songDuration - songDuration / 2;
+        const e = Math.abs(d);
+        if (e < best) best = e;
+      }
+      if (best <= 0.1) {
+        // 完美：300 分 + 连击奖励 (combo-1)*20
+        state.combo++;
+        const gained = 300 + (state.combo - 1) * 20;
+        state.musicScore += gained;
+        flashIndicator('完美 +' + gained, 'perfect');
+        if (state.combo % 50 === 0) { frenzy = true; triggerMilestone(state.combo); } // 整十连击
+        onComboChanged(state.combo); // 更新背景图与粒子特效
+        updateGrade(); // 更新总分条与等级
+      } else if (best <= 0.2) {
+        // 优秀：120 分 + 连击奖励 (combo-1)*20
+        state.combo++;
+        const gained = 120 + (state.combo - 1) * 20;
+        state.musicScore += gained;
+        flashIndicator('优秀 +' + gained, 'great');
+        if (state.combo % 50 === 0) { frenzy = true; triggerMilestone(state.combo); } // 整十连击
+        onComboChanged(state.combo); // 更新背景图与粒子特效
+        updateGrade(); // 更新总分条与等级
+      } else {
+        // 失败：0 分，连击清零，旋转/抖动复原
+        state.combo = 0;
+        frenzy = false;
+        onComboChanged(0); // 清零：去除背景图，特效消失
+        flashIndicator('失败', 'fail');
+      }
+    }
+
+    function success() {
+      rhythmJudge(); // 掰直成功即音游判定：决定 完美/优秀/失败 与连击
+      // 生成损坏手机（花屏）从当前掰直姿态下落
+      const f = createPhone(true);
+      setFold(f, 1);
+      f.rotation.set(0, 0, 0);
+      scene.add(f);
+      falling.push({
+        mesh: f,
+        vy: 0.05,
+        ax: (Math.random() - 0.5) * 0.12,
+        ay: (Math.random() - 0.5) * 0.12,
+        az: (Math.random() - 0.5) * 0.12
+      });
+      state.score++;
+      // 复位主手机，准备下一台（新手机从折叠态开始）；旋转保持连续不跳变
+      foldProgress = 0;
+      setFold(mainPhone, 0);
+    }
+
+    function fail() {
+      flashIndicator('✗', 'cross'); // 没掰直：原判定（不影响连击）
+      requiredDistance = Math.max(MIN_DIST, requiredDistance - STEP);
+      // 不复位角度：保留当前掰开的角度，下次从这儿继续
+    }
+
+    /* ---------- 手势：向下滑动 = 掰手机（角度可累积，失败保留） ---------- */
+    function onDown(e) {
+      if (!state.playing) return;
+      dragging = true;
+      startY = e.clientY;
+      dragDist = 0;
+      startFold = foldProgress; // 从当前已掰开的角度继续
+    }
+    function onMove(e) {
+      if (!dragging) return;
+      const dy = e.clientY - startY;
+      dragDist = Math.max(0, Math.min(dy, 9999)); // 仅向下累加，向上不回退
+      const fp = Math.min(1, startFold + dragDist / requiredDistance);
+      setFold(mainPhone, fp);
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      if (dragDist < 8) return; // 误触不判定
+      const fp = Math.min(1, startFold + dragDist / requiredDistance);
+      foldProgress = fp; // 保留本次达到的角度
+      if (fp >= 1) success();
+      else fail();
+    }
+    window.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+
+    /* ---------- 背景音乐 / PCM 读取 / 实时电平表 ---------- */
+    let audioEl = null, audioCtx = null, synthTimer = null;
+    let analyser = null, masterGain = null, mediaSrc = null;
+    let pcmReady = false, peakTimes = [], songDuration = 10, noteWrapLen = 200, scrollX = 0;
+    let noteAnim = null; // 音符整体左移的 Web Animations 动画实例
+    let noteEls = [];
+
+    // 注意：Vue 会在 mount(#ui) 时清空并重建 #ui 内的 DOM，
+    // 所以这些元素必须等 mount 之后再取“活的”节点。
+    let noteTrackEl = null;
+    let noteScrollEl = null;
+    let levelFillEl = null;
+
+    function ensureAudioGraph() {
+      if (audioCtx) return;
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+      catch (e) { return; }
+      masterGain = audioCtx.createGain();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 1024;
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+    }
+
+    // 合成五声音阶（mp3 缺失时回退），接入主总线以便电平表可见
+    function ensureSynth() {
+      if (!audioCtx || synthTimer) return;
+      const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33];
+      function pluck(freq, t) {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = 'triangle';
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.22, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+        g.connect(masterGain);
+        o.start(t); o.stop(t + 0.65);
+      }
+      synthTimer = setInterval(() => {
+        if (state.muted || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        pluck(scale[(Math.random() * scale.length) | 0], now);
+        if (Math.random() < 0.5) pluck(scale[(Math.random() * scale.length) | 0], now + 0.28);
+      }, 620);
+    }
+
+    function initAudio() {
+      ensureAudioGraph();
+      if (!audioEl) {
+        audioEl = new Audio('琵琶曲.mp3');
+        audioEl.loop = true;
+        audioEl.volume = 0.6;
+        audioEl.addEventListener('error', ensureSynth); // mp3 缺失回退
+      }
+      if (masterGain) masterGain.gain.value = state.muted ? 0 : 1; // 静音由主增益控制
+      if (audioEl) {
+        audioEl.muted = false;
+        try {
+          if (!mediaSrc) { mediaSrc = audioCtx.createMediaElementSource(audioEl); mediaSrc.connect(masterGain); }
+          audioEl.play().catch(ensureSynth);
+        } catch (e) { audioEl.play().catch(ensureSynth); }
+      }
+    }
+
+    function stopAudio() {
+      if (audioEl) audioEl.pause();
+      if (synthTimer) { clearInterval(synthTimer); synthTimer = null; }
+    }
+
+    /* ---------- 硬编码音符（不再读取 PCM） ---------- */
+    // 音符时刻（秒）。针对 146 秒倒计时硬编码：覆盖 0~144s；在原始节奏基础上两两取中点，密度翻倍（minGap=0.125s）。
+    const NOTES = [0,0.5,1,1.5,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4,4.25,4.5,4.75,5,5.5,6,6.5,7,7.25,7.5,7.75,8,8.5,9,9.25,9.5,10,10.5,10.75,11,11.25,11.5,11.75,12,12.375,12.75,13.125,13.5,13.875,14.25,14.625,15,15.375,15.75,15.875,16,16.5,17,17.5,18,18.25,18.5,18.75,19,19.25,19.5,19.75,20,20.25,20.5,20.75,21,21.5,22,22.5,23,23.25,23.5,23.75,24,24.5,25,25.25,25.5,26,26.5,26.75,27,27.25,27.5,27.75,28,28.375,28.75,29.125,29.5,29.875,30.25,30.625,31,31.375,31.75,31.875,32,32.5,33,33.5,34,34.25,34.5,34.75,35,35.25,35.5,35.75,36,36.25,36.5,36.75,37,37.5,38,38.5,39,39.25,39.5,39.75,40,40.5,41,41.25,41.5,42,42.5,42.75,43,43.25,43.5,43.75,44,44.375,44.75,45.125,45.5,45.875,46.25,46.625,47,47.375,47.75,47.875,48,48.5,49,49.5,50,50.25,50.5,50.75,51,51.25,51.5,51.75,52,52.25,52.5,52.75,53,53.5,54,54.5,55,55.25,55.5,55.75,56,56.5,57,57.25,57.5,58,58.5,58.75,59,59.25,59.5,59.75,60,60.375,60.75,61.125,61.5,61.875,62.25,62.625,63,63.375,63.75,63.875,64,64.5,65,65.5,66,66.25,66.5,66.75,67,67.25,67.5,67.75,68,68.25,68.5,68.75,69,69.5,70,70.5,71,71.25,71.5,71.75,72,72.5,73,73.25,73.5,74,74.5,74.75,75,75.25,75.5,75.75,76,76.375,76.75,77.125,77.5,77.875,78.25,78.625,79,79.375,79.75,79.875,80,80.5,81,81.5,82,82.25,82.5,82.75,83,83.25,83.5,83.75,84,84.25,84.5,84.75,85,85.5,86,86.5,87,87.25,87.5,87.75,88,88.5,89,89.25,89.5,90,90.5,90.75,91,91.25,91.5,91.75,92,92.375,92.75,93.125,93.5,93.875,94.25,94.625,95,95.375,95.75,95.875,96,96.5,97,97.5,98,98.25,98.5,98.75,99,99.25,99.5,99.75,100,100.25,100.5,100.75,101,101.5,102,102.5,103,103.25,103.5,103.75,104,104.5,105,105.25,105.5,106,106.5,106.75,107,107.25,107.5,107.75,108,108.375,108.75,109.125,109.5,109.875,110.25,110.625,111,111.375,111.75,111.875,112,112.5,113,113.5,114,114.25,114.5,114.75,115,115.25,115.5,115.75,116,116.25,116.5,116.75,117,117.5,118,118.5,119,119.25,119.5,119.75,120,120.5,121,121.25,121.5,122,122.5,122.75,123,123.25,123.5,123.75,124,124.375,124.75,125.125,125.5,125.875,126.25,126.625,127,127.375,127.75,127.875,128,128.5,129,129.5,130,130.25,130.5,130.75,131,131.25,131.5,131.75,132,132.25,132.5,132.75,133,133.5,134,134.5,135,135.25,135.5,135.75,136,136.5,137,137.25,137.5,138,138.5,138.75,139,139.25,139.5,139.75,140,140.375,140.75,141.125,141.5,141.875,142.25,142.625,143,143.375,143.75,143.875,144];
+
+    // 滚动速度(px/s) 由音符间最小时间间隔推算，使相邻音符间距合理（不再挤在一起）
+    let SCROLL_SPEED = 200;
+
+    function buildNotes(times) {
+      peakTimes = times;
+      songDuration = Math.max(10, times.length ? times[times.length - 1] + 2 : 10);
+      // 相邻音符距离 = 时间间隔 × 速度；按最小间隔定速度，目标最小间距 ~90px
+      let minGap = Infinity;
+      for (let i = 1; i < times.length; i++) minGap = Math.min(minGap, times[i] - times[i - 1]);
+      if (isFinite(minGap) && minGap > 0) {
+        SCROLL_SPEED = Math.max(120, Math.min(340, 90 / minGap));
+      }
+      noteWrapLen = SCROLL_SPEED * songDuration; // 轨道按 速度×曲长 循环
+      noteScrollEl.style.width = (2 * noteWrapLen) + 'px'; // 双份宽度，便于无缝循环
+      // 用 Web Animations API 让整个容器左移一个 noteWrapLen（无缝循环），默认暂停
+      if (noteAnim) { noteAnim.cancel(); noteAnim = null; }
+      if (noteScrollEl.animate) {
+        noteAnim = noteScrollEl.animate(
+          [{ transform: 'translateX(0px)' }, { transform: 'translateX(' + (-noteWrapLen) + 'px)' }],
+          { duration: songDuration * 1000, iterations: Infinity, easing: 'linear' }
+        );
+        noteAnim.pause(); // 点击“开始游戏”后才播放
+      }
+      noteScrollEl.innerHTML = '';
+      noteEls = [];
+      const addNote = (t, offset) => {
+        const el = document.createElement('div');
+        el.className = 'note';
+        el.textContent = '♪';
+        el.style.left = (SCROLL_SPEED * t + offset) + 'px'; // 绝对定位，整体随容器平移
+        noteScrollEl.appendChild(el);
+        noteEls.push(el);
+      };
+      times.forEach(t => { addNote(t, 0); addNote(t, noteWrapLen); }); // 两份：第二份接在第一份之后
+      pcmReady = true;
+    }
+
+    // 注意：先不要在这里摆放音符——此时 #noteScroll 还是被 Vue 挂载后丢弃的旧节点。
+    // 真正的摆放放在 mount('#ui') 之后（见文件末尾的 initNotesAfterMount）。
+
+    // 实时电平(RMS)
+    function getLevel() {
+      if (!analyser) return 0;
+      const buf = new Float32Array(analyser.fftSize);
+      analyser.getFloatTimeDomainData(buf);
+      let sum = 0;
+      for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+      const rms = Math.sqrt(sum / buf.length);
+      return Math.min(1, rms * 3.2);
+    }
+
+    // 音符整体左移已由 #noteScroll 的纯 CSS 关键帧动画完成，无需 JS 再设置 transform
+    function updateNotes() { /* 空：滚动交给 CSS */ }
+
+    /* ---------- 开始 / 结束 / 重开 ---------- */
+    function startGame() {
+      state.started = true;
+      state.playing = true;
+      state.gameOver = false;
+      state.timeLeft = 146;
+      state.score = 0;
+      state.combo = 0; // 新一局连击清零
+      onComboChanged(0); // 新一局去除背景图，特效消失
+      state.musicScore = 0; // 新一局音游总分清零
+      state.scorePct = 0; state.grade = 'B'; // 总分条与等级复位
+      frenzy = false;     // 新一局旋转/抖动复原
+      mainPhone.position.set(0, 0, 0); // 复原抖动位移
+      mainPhone.rotation.x = 0; mainPhone.rotation.y = 0;
+      requiredDistance = START_DIST;
+      foldProgress = 0;
+      setFold(mainPhone, 0);
+      scrollX = 0; // 音符轨道与音乐播放同步归零
+      if (noteAnim) { noteAnim.currentTime = 0; noteAnim.play(); } // 点击开始后音符才开始左移
+      initAudio(); // 在用户手势内创建并恢复音频上下文
+      if (audioCtx) audioCtx.resume();
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        state.timeLeft--;
+        if (state.timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    function endGame() {
+      state.playing = false;
+      state.gameOver = true;
+      clearInterval(timerId);
+      stopAudio();
+      frenzy = false; // 结束即停止加速/抖动（不强行清零连击）
+      if (noteAnim) noteAnim.pause(); // 游戏结束：暂停音符平移
+      submitScoreAndLoadRank(); // 上报分数并加载排行榜
+    }
+
+    /* ---------- Toy SDK：排行榜 + 关注/充电跳转 ---------- */
+    const AUTHOR_MID = '1888473666'; // 作者 space id
+
+    async function submitScoreAndLoadRank() {
+      if (!window.toy) return; // 非 Toy 环境（如本地 file:// 预览）直接跳过
+      try {
+        // 上报本局总分（服务端只保留历史最高分）
+        await toy.submitScore({ score: state.musicScore });
+      } catch (e) { /* 未登录或限流时不阻塞结算页 */ }
+      try {
+        // 拉取总榜前 10 名 + 我的排名
+        const [list, mine] = await Promise.all([
+          toy.getRankList({ limit: 10 }),
+          toy.getMyRank().catch(() => ({ ranked: false, rank: 0, score: 0 }))
+        ]);
+        state.rankList = list;
+        state.myRank = mine;
+      } catch (e) { /* 拉榜失败保持加载中提示为空 */ }
+    }
+
+    async function followAuthor() {
+      const fallback = () => { window.open('https://space.bilibili.com/' + AUTHOR_MID, '_blank'); };
+      try {
+        const ok = await toy.isSupport('navigate');
+        if (!ok) { fallback(); return; } // 不支持 navigate：兜底跳 space 链接
+        await toy.navigate({ type: 'space', id: AUTHOR_MID });
+      } catch (e) {
+        fallback(); // 调用失败（如 Web 端抛错）：同样兜底
+      }
+    }
+
+    function restartGame() {
+      // 清掉下落中的手机
+      for (const f of falling) scene.remove(f.mesh);
+      falling.length = 0;
+      startGame();
+    }
+
+    function toggleMute() {
+      state.muted = !state.muted;
+      if (masterGain) masterGain.gain.value = state.muted ? 0 : 1; // 静音由主增益控制，电平表随之归零
+      if (!state.muted && audioCtx) audioCtx.resume();
+    }
+
+    /* ---------- 渲染循环 ---------- */
+    const ROT_SPEED = 0.01; // 手机绕 Z 轴匀速旋转角速度(弧度/帧)
+    const ROT_MULT = 2;     // 整十连击时旋转速度加倍
+    let lastTime = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const now = performance.now();
+      const dt = lastTime ? (now - lastTime) / 1000 : 0;
+      lastTime = now;
+
+      // 手机一直匀速绕 Z 轴旋转；整十连击时速度加倍 + 随机抖动
+      mainPhone.rotation.z += ROT_SPEED * (frenzy ? ROT_MULT : 1);
+      if (frenzy) {
+        mainPhone.position.x = (Math.random() - 0.5) * 0.35;
+        mainPhone.position.y = (Math.random() - 0.5) * 0.35;
+        mainPhone.rotation.x = (Math.random() - 0.5) * 0.12;
+        mainPhone.rotation.y = (Math.random() - 0.5) * 0.12;
+      } else if (mainPhone.position.x !== 0 || mainPhone.position.y !== 0 ||
+                 mainPhone.rotation.x !== 0 || mainPhone.rotation.y !== 0) {
+        mainPhone.position.set(0, 0, 0);
+        mainPhone.rotation.x = 0;
+        mainPhone.rotation.y = 0;
+      }
+
+      // 音游提示：音符整体左移由 Web Animations 驱动；此处只更新实时电平表
+      if (levelFillEl) levelFillEl.style.height = (getLevel() * 100) + '%';
+
+      // 损坏手机下落 + 闪屏
+      for (const f of falling) {
+        f.mesh.position.y += f.vy;
+        f.vy -= 0.012;
+        f.mesh.rotation.x += f.ax;
+        f.mesh.rotation.y += f.ay;
+        f.mesh.rotation.z += f.az;
+        // 花屏闪动
+        if (Math.random() < 0.35) {
+          f.mesh.userData.frontMat.emissive.setHex(Math.random() < 0.5 ? 0x000000 : 0x553333);
+        }
+        if (f.mesh.position.y < -14) f.dead = true;
+      }
+      for (let i = falling.length - 1; i >= 0; i--) {
+        if (falling[i].dead) { scene.remove(falling[i].mesh); falling.splice(i, 1); }
+      }
+
+      // 全局粒子特效更新
+      updateParticles(dt);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    /* ---------- 自适应窗口 ---------- */
+    window.addEventListener('resize', () => {
+      W = window.innerWidth; H = window.innerHeight;
+      camera.aspect = W / H;
+      camera.updateProjectionMatrix();
+      renderer.setSize(W, H);
+    });
+
+    /* ---------- 挂载 Vue ---------- */
+    createApp({
+      setup() {
+        return { state, isMobile, start: startGame, restart: restartGame, toggleMute, followAuthor };
+      }
+    }).mount('#ui');
+
+    // 测试钩子：供 playwright 验证连击特效（正常游戏不影响）
+    window.__testCombo = function (n) { state.combo = n; onComboChanged(n); };
+    // 测试钩子：供 playwright 验证总分条（正常游戏不影响）
+    window.__testScore = function (score) {
+      state.started = state.playing = true; state.gameOver = false; // 让总分条 v-if 生效
+      state.musicScore = score; updateGrade();
+    };
+    // 测试钩子：供 playwright 直接触发结算页（正常游戏不影响）
+    window.__endGame = function () { endGame(); };
+
+    /* ---------- 挂载后再摆放音符（必须用 Vue 重建后的“活”节点） ---------- */
+    noteScrollEl = document.getElementById('noteScroll');   // 活的节点
+    noteTrackEl = document.getElementById('noteTrack');
+    levelFillEl = document.getElementById('levelBarFill');  // 活的节点，否则电平表也不动
+    buildNotes(NOTES);                                       // 现在音符会真的出现在可见节点上
+
+    // 音游音符已在脚本初始化时摆放（硬编码），无需读取 PCM 波形
+  })();
+  </script>
+</body>
+</html>
